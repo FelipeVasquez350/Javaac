@@ -2,7 +2,7 @@
 
 
 
-public class Player{
+public class PlayerData{
     private int health = 6;
     private float speed = 1.00f;
     private float damage = 3.50f;
