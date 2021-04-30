@@ -8,7 +8,7 @@ public class KeyBoardListener extends KeyAdapter  {
     public KeyBoardListener(Board b) {
         this.br = b;
     }
-    public void keyPressed(KeyEvent e, Player p){
+    public void keyPressed(KeyEvent e, PlayerData p){
         int key= e.getKeyCode();
         if(key == KeyEvent.VK_D){
            p.move(0.1f, 0f);
