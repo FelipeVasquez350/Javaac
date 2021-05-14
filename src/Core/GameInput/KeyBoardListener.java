@@ -1,12 +1,16 @@
+package Core.GameInput;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import Core.Javaac.Window;
+import Core.Player.PlayerData;
 
 public class KeyBoardListener extends KeyAdapter  {
 
-    public Board br;
+    public Window window;
 
-    public KeyBoardListener(Board b) {
-        this.br = b;
+    public KeyBoardListener(Window window) {
+        this.window = window;
     }
     public void keyPressed(KeyEvent e, PlayerData p){
         int key= e.getKeyCode();
