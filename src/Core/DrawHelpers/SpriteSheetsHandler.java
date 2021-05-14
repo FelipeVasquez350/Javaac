@@ -2,7 +2,7 @@ package Core.DrawHelpers;
 
 import java.awt.image.BufferedImage;
 
-public class SpriteSheetsHandler {
+public class SpriteSheetsHandler extends SpriteLoader{
     private BufferedImage sprite;
 
     public SpriteSheetsHandler(BufferedImage sprite) {

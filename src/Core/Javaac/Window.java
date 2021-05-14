@@ -23,7 +23,6 @@ public class Window extends JPanel implements Runnable{
 
     @Override
     public void run() {
-       
         while(true) {
             repaint();
         }
@@ -38,9 +37,8 @@ public class Window extends JPanel implements Runnable{
             Image image = ImageIO.read(pathToFile);
             graphics.drawImage(image, 0, 0, null);
 
-            SpriteLoader SPLoader = new SpriteLoader();
             BufferedImage spriteSheet = null;
-            spriteSheet = SPLoader.loadSprite("./src/Assets/Menu/Tabs.png");
+            spriteSheet = SpriteLoader.loadSprite("./src/Assets/Menu/Tabs.png");
             SpriteSheetsHandler SP = new SpriteSheetsHandler(spriteSheet);
             
             BufferedImage[] menu = new BufferedImage[5];
@@ -49,8 +47,14 @@ public class Window extends JPanel implements Runnable{
             }
            
             for (int i=0; i<5; i++) {
-                graphics.drawImage(menu[i], 410, 410 + 37*i, null);
+               graphics.drawImage(menu[i], 410, 410 + 37*i, null);
             }
+
+            Sprite sprite = new Sprite("./src/Assets/Menu/selector.png");
+            sprite.drawSprite(graphics, 50, 50);
+
+
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
