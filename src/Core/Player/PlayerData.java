@@ -1,5 +1,8 @@
 package Core.Player;
 
+import java.io.IOException;
+
+import Core.DrawHelpers.Sprite;
 import Core.Javaac.Window;
 import Core.Projectile.Projectile;
 
@@ -12,7 +15,7 @@ public class PlayerData{
     private float range = 6.50f;
     private float shootSpeed = 1.00f;
     private float luck = 1.00f;
-    private float x,y;
+    public int x,y;
     private float devilPact = 0.00f;
     private float anglePact = 0.00f;
 
@@ -20,8 +23,14 @@ public class PlayerData{
     private boolean spectral = false;
 
     private Window w;
-    public PlayerData(Window w) {
+    public Sprite Sprite;
+    public PlayerData(Window w, String spritePath) {
         this.w = w;
+        try {
+            this.Sprite = new Sprite("./src/Assets/Menu/selector.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -97,19 +106,19 @@ public class PlayerData{
     public void setSpectral(boolean spectral) {
         this.spectral = spectral;
     }
-    public float getX() {
+    public int getX() {
         return x;
     }
-    public void setX(float x) {
+    public void setX(int x) {
         this.x = x;
     }
-    public float getY() {
+    public int getY() {
         return y;
     }
-    public void setY(float y) {
+    public void setY(int y) {
         this.y = y;
     }
-    public boolean move(float x, float y){
+    public boolean move(int x, int y){
         setX(getX()+ x);
         setY(getY() + y);
         return true;

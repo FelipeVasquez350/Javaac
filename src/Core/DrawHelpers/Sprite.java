@@ -13,7 +13,7 @@ public class Sprite extends SpriteSheetsHandler{
         this.sprite = loadSprite(path);
     }
     
-    public void drawSprite(Graphics g, int x, int y) throws IOException {
-        g.drawImage(sprite, x, y, null);
+    public void drawSprite(Graphics graphics, int x, int y) throws IOException {
+        graphics.drawImage(sprite, x, y, null);
     }
 }

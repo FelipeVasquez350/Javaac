@@ -1,25 +1,20 @@
 package Core.Projectile;
 
 import java.io.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 import Core.DrawHelpers.Sprite;
 import Core.Javaac.Window;
 public class Projectile{
-    private int x,y;
-    private Thread t;
+
+    public int x,y;
+    public Sprite sprite;
     private Window w;
 
     public Projectile(int x, int y, Window w) {
-        Sprite sprite;
         try {
             sprite = new Sprite("./src/Assets/Menu/selector.png");
-            w.addSprite(sprite);
+            w.addProjectile(this);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }  
     }
@@ -36,6 +31,9 @@ public class Projectile{
         this.y = y;
     }
 
+    public void remove() {
+        w.delProjectile(this);
+    }
     public boolean Move(int x, int y){
         setX(getX()+ x);
         setY(getY() + y);

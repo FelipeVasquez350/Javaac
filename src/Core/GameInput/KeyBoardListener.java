@@ -39,16 +39,16 @@ public class KeyBoardListener extends KeyAdapter  {
             public void run() {
                 for(int i=0; i<keys.size(); i++){
                     if(keys.get(i) == KeyEvent.VK_D){
-                        player.move(1f, 0f);
+                        player.move(1, 0);
                     }
                     if(keys.get(i) == KeyEvent.VK_A){
-                        player.move(-1f, 0f);
+                        player.move(-1, 0);
                     }
                     if(keys.get(i) == KeyEvent.VK_S){
-                        player.move(0f, 1f);
+                        player.move(0, 1);
                     }
                     if(keys.get(i) == KeyEvent.VK_W){
-                        player.move(0f, -1f);
+                        player.move(0, -1);
                     }
                     if(keys.get(i) == KeyEvent.VK_RIGHT){
                         player.shot("Right");
