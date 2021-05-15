@@ -29,7 +29,7 @@ public class Main extends JFrame implements Runnable{
         MouseLogic Mouse = new MouseLogic();
         addMouseMotionListener(Mouse);
         while (true) {
-            System.out.println("Mouse X = "+(Mouse.getX()-getLocation().x-8)+", Y = "+(Mouse.getY()-getLocation().y-32));
+       //     System.out.println("Mouse X = "+(Mouse.getX()-getLocation().x-8)+", Y = "+(Mouse.getY()-getLocation().y-32));
         }        
     }
 }

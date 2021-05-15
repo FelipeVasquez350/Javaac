@@ -1,6 +1,7 @@
+package Core.Player;
 
-
-
+import Core.Javaac.Window;
+import Core.Projectile.Projectile;
 
 public class PlayerData{
     private int health = 6;
@@ -18,6 +19,10 @@ public class PlayerData{
     private boolean piercing = false;
     private boolean spectral = false;
 
+    private Window w;
+    public PlayerData(Window w) {
+        this.w = w;
+    }
 
 
     public int getHealth() {
@@ -109,18 +114,19 @@ public class PlayerData{
         setY(getY() + y);
         return true;
     }
-    public void shot(String position){
-        if(position.equalsIgnoreCase("Right")){
-
+    public void shot(String direction){
+        if(direction.equalsIgnoreCase("Right")){
+     //       System.out.println("Right");
+            Projectile a = new Projectile((int)getX(), (int)getY(), w);
         }
-        else if(position.equalsIgnoreCase("Up")){
- 
+        else if(direction.equalsIgnoreCase("Up")){
+      //      System.out.println("Up");
         }
-        else if(position.equalsIgnoreCase("Down")){
- 
+        else if(direction.equalsIgnoreCase("Down")){
+       //     System.out.println("Down");
         }
-        else if(position.equalsIgnoreCase("Left")){
-
+        else if(direction.equalsIgnoreCase("Left")){
+       //     System.out.println("Left");
         }
    }
     
