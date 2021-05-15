@@ -3,7 +3,7 @@ package Core.GameInput;
 import java.awt.*;
 import java.awt.event.*; 
 
-public class MouseLogic implements MouseMotionListener{
+public class MouseListener implements MouseMotionListener{
     
     
 

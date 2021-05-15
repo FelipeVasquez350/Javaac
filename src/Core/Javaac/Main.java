@@ -1,7 +1,7 @@
 package Core.Javaac;
 
 import javax.swing.JFrame;
-import Core.GameInput.MouseLogic;
+import Core.GameInput.MouseListener;
 
 public class Main extends JFrame implements Runnable{
     
@@ -26,7 +26,7 @@ public class Main extends JFrame implements Runnable{
 
     @Override
     public void run() {
-        MouseLogic Mouse = new MouseLogic();
+        MouseListener Mouse = new MouseListener();
         addMouseMotionListener(Mouse);
         while (true) {
        //     System.out.println("Mouse X = "+(Mouse.getX()-getLocation().x-8)+", Y = "+(Mouse.getY()-getLocation().y-32));
