@@ -38,31 +38,37 @@ public class KeyBoardListener extends KeyAdapter {
 		task = new TimerTask(){
 			@Override
 			public void run() {
-				
-				for(int i=0; i<keys.size(); i++){
-					if(keys.get(i) == KeyEvent.VK_D){
-						player.move(1, 0);
-					}
-					if(keys.get(i) == KeyEvent.VK_A){
-						player.move(-1, 0);
-					}
-					if(keys.get(i) == KeyEvent.VK_S){
-						player.move(0, 1);
-					}
-					if(keys.get(i) == KeyEvent.VK_W){
-						player.move(0, -1);
-					}
-					if(keys.get(i) == KeyEvent.VK_RIGHT){
-						player.shot("Right");
-					}
-					if(keys.get(i) == KeyEvent.VK_UP){
-						player.shot("UP");
-					}
-					if(keys.get(i) == KeyEvent.VK_DOWN){
-						player.shot("Down");
-					}
-					if(keys.get(i) == KeyEvent.VK_LEFT){
-						player.shot("Left");
+
+				for(Integer i=0; i<keys.size(); i++){
+					try {
+						if(keys.get(i) != null) {
+							if(keys.get(i) == KeyEvent.VK_D){
+								player.move(1, 0);
+							}
+							if(keys.get(i) == KeyEvent.VK_A){
+								player.move(-1, 0);
+							}
+							if(keys.get(i) == KeyEvent.VK_S){
+								player.move(0, 1);
+							}
+							if(keys.get(i) == KeyEvent.VK_W){
+								player.move(0, -1);
+							}
+							if(keys.get(i) == KeyEvent.VK_RIGHT){
+								player.shot("Right");
+							}
+							if(keys.get(i) == KeyEvent.VK_UP){
+								player.shot("UP");
+							}
+							if(keys.get(i) == KeyEvent.VK_DOWN){
+								player.shot("Down");
+							}
+							if(keys.get(i) == KeyEvent.VK_LEFT){
+								player.shot("Left");
+							}
+						}
+					} catch(IndexOutOfBoundsException e) {
+						
 					}
 
 				}
@@ -78,7 +84,7 @@ public class KeyBoardListener extends KeyAdapter {
 	public void keyReleased(KeyEvent e){
 		Integer key = e.getKeyCode();
 
-		
+
 
 
 		if(timer!=null && keys.size()<=0){
@@ -91,12 +97,12 @@ public class KeyBoardListener extends KeyAdapter {
 		}
 	}
 
-    public boolean enterPressed() {
-        for(int i=0; i<keys.size(); i++){
-            if(keys.get(i) == KeyEvent.VK_ENTER){
-                return true;
-            }
-        }
-        return false;
-    }
+	public boolean enterPressed() {
+		for(int i=0; i<keys.size(); i++){
+			if(keys.get(i) == KeyEvent.VK_ENTER){
+				return true;
+			}
+		}
+		return false;
+	}
 }
