@@ -19,4 +19,3 @@ public class Main extends JFrame{
 		JF.setVisible(true);  
 	}
 }
-

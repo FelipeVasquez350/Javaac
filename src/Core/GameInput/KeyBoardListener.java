@@ -87,4 +87,13 @@ public class KeyBoardListener extends KeyAdapter {
 			timer = null;
 		}
 	}
+
+    public boolean enterPressed() {
+        for(int i=0; i<keys.size(); i++){
+            if(keys.get(i) == KeyEvent.VK_ENTER){
+                return true;
+            }
+        }
+        return false;
+    }
 }

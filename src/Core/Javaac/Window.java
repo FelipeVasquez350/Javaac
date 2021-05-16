@@ -3,8 +3,6 @@ package Core.Javaac;
 import java.io.*;
 import java.util.ArrayList;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import Core.DrawHelpers.*;
@@ -13,64 +11,90 @@ import Core.Player.PlayerData;
 import Core.Projectile.Projectile;
 
 public class Window extends JPanel implements Runnable{
+    
+    private Thread win;
+    private PlayerData player = new PlayerData(this, "./src/Assets/Menu/selector.png");
+    private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+    private Sprite background;
+    public static KeyBoardListener k;
+    private Scene scene; 
 
-	private Thread win;
-	private PlayerData player = new PlayerData(this, "./src/Assets/Menu/selector.png");
-	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-	//private ArrayList<Sprite> backgrounds = new ArrayList<Sprite>();
-	private Dimension d;
+    public Window() {
+        setBackground(Color.DARK_GRAY);
+        setPreferredSize(new Dimension(1000, 1000));
+        setVisible(true);
+        win = new Thread(this);
+        win.setPriority(Thread.MAX_PRIORITY);
+        win.start();
 
-	public Window() {
-		setBackground(Color.DARK_GRAY);
-		d=new Dimension(1000,1000);
-		setPreferredSize(d);
-		setVisible(true);
-		win = new Thread(this);
-		win.setPriority(Thread.MAX_PRIORITY);
-		win.start();
-		KeyBoardListener k = new KeyBoardListener(this, player);
-		setFocusable(true);
-		requestFocusInWindow();
-		addKeyListener(k);
-	}
+        k = new KeyBoardListener(this, player);
+        setFocusable(true);
+        requestFocusInWindow();
+        addKeyListener(k);
+        initWindow();
+    }
 
-	public void addProjectile(Projectile projectile) {
-		this.projectiles.add(projectile);
-	}
+    public KeyBoardListener getKeyBoard() {
+        return k;
+    }
 
-	public void delProjectile(Projectile projectile) {
-		this.projectiles.remove(projectile);
-	}
+    public void addProjectile(Projectile projectile) {
+        this.projectiles.add(projectile);
+    }
 
-	@Override
-	public void run(){
-		while(true) {
+    public void delProjectile(Projectile projectile) {
+        this.projectiles.remove(projectile);
+    }
+
+    @Override
+    public void run() {
+        while(true) {
 			try {
 				Thread.sleep(1);
-				repaint();
-				
-			} catch (InterruptedException e) {
-				
-				e.printStackTrace();
-				
+				repaint();		
+			} catch (InterruptedException e) {		
+				e.printStackTrace();		
 			}
+        }
+    }
 
-		}
-	}
+    public void initWindow() {
+        try {
+            background = new Sprite("./src/Assets/Menu/emptyscreen.png");
+            scene = new Scene();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Override
-	public void paintComponent(Graphics graphics) {
-		super.paintComponent(graphics);
-		try {
-			for (Projectile projectile : projectiles) { 
-				if (projectile != null) 
-					projectile.sprite.drawSprite(graphics, 300,300);
+    @Override
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        try {       
+            //#region BACKGROUND     
+            background.drawSprite(graphics, 0, 0);
+            //#endregion
+            
+            //#region PLAYER
+            player.Sprite.drawSprite(graphics, player.x, player.y);
+            //#endregion
+
+            //#region PROJECTILES
+            for (Projectile projectile : projectiles) { 
+                if (projectile != null) 
+				    projectile.sprite.drawSprite(graphics, 300,  300);
 			} 
-			player.Sprite.drawSprite(graphics, player.x, player.y);
+            //#endregion
+            
+            //#region UI
+            scene.menu.button.sprite.drawSprite(graphics, scene.menu.button.x, scene.menu.button.y);
+            if(scene.menu.button.clicked())
+                System.out.println("Hey");
+            //#endregion
+
 		}catch (IOException e) {
-			e.printStackTrace();
+            e.printStackTrace();
 
-		}
-
-	}
+        }        
+    }
 }
