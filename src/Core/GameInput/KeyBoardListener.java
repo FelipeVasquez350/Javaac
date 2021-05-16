@@ -38,6 +38,7 @@ public class KeyBoardListener extends KeyAdapter {
 		task = new TimerTask(){
 			@Override
 			public void run() {
+				
 				for(int i=0; i<keys.size(); i++){
 					if(keys.get(i) == KeyEvent.VK_D){
 						player.move(1, 0);
@@ -77,14 +78,16 @@ public class KeyBoardListener extends KeyAdapter {
 	public void keyReleased(KeyEvent e){
 		Integer key = e.getKeyCode();
 
-		if(keys.contains(key)) {
-			keys.remove(key);
-		}
+		
 
 
 		if(timer!=null && keys.size()<=0){
 			timer.cancel();
 			timer = null;
+		}
+
+		if(keys.contains(key)) {
+			keys.remove(key);
 		}
 	}
 

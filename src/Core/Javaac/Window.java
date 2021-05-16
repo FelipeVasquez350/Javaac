@@ -3,6 +3,7 @@ package Core.Javaac;
 import java.io.*;
 import java.util.ArrayList;
 import java.awt.*;
+
 import javax.swing.JPanel;
 
 import Core.DrawHelpers.*;
@@ -80,16 +81,43 @@ public class Window extends JPanel implements Runnable{
             //#endregion
 
             //#region PROJECTILES
-            for (Projectile projectile : projectiles) { 
+            for (int i=0; i<projectiles.size(); i++) {
+                projectiles.get(i).sprite.drawSprite(graphics, 300,  300);
+            }
+         /*  for (Projectile projectile : projectiles) { 
                 if (projectile != null) 
 				    projectile.sprite.drawSprite(graphics, 300,  300);
-			} 
+			} */
             //#endregion
             
             //#region UI
-            scene.menu.button.sprite.drawSprite(graphics, scene.menu.button.x, scene.menu.button.y);
+          /*  scene.menu.button.sprite.drawSprite(graphics, scene.menu.button.x, scene.menu.button.y);
             if(scene.menu.button.clicked())
-                System.out.println("Hey");
+                System.out.println("Hey");*/
+            Sprite soonTM = new Sprite("./src/Assets/Menu/SoonTM.png");
+            for (int j = 0; j<scene.menu.buttons.size(); j++) {
+                if(scene.menu.buttons.get(j).x < player.x && scene.menu.buttons.get(j).x + scene.menu.buttons.get(j).width > player.x && scene.menu.buttons.get(j).y < player.y && scene.menu.buttons.get(j).y + scene.menu.buttons.get(j).height > player.y) {
+                    scene.menu.spriteBottoni.get(j).drawSprite(graphics, scene.menu.buttons.get(j).x,  scene.menu.buttons.get(j).y);
+                    if(scene.menu.buttons.get(j).clicked() && j!=0);
+                        soonTM.drawSprite(graphics, 500, 500);
+                }
+
+                else
+                    scene.menu.spriteBottoni2.get(j).drawSprite(graphics, scene.menu.buttons.get(j).x,  scene.menu.buttons.get(j).y);
+            
+                // if(!scene.menu.buttons.get(j).selected)
+                //     scene.menu.spriteBottoni2.get(j).drawSprite(graphics, scene.menu.buttons.get(j).x,  scene.menu.buttons.get(j).y);
+
+                // else
+                //     scene.menu.spriteBottoni.get(j).drawSprite(graphics, scene.menu.buttons.get(j).x,  scene.menu.buttons.get(j).y);
+            
+               
+            }
+            for (int j = 0; j<scene.menu.buttons.size(); j++) {
+                if(scene.menu.buttons.get(j).x < player.x && scene.menu.buttons.get(j).x + scene.menu.buttons.get(j).width > player.x && scene.menu.buttons.get(j).y < player.y && scene.menu.buttons.get(j).y + scene.menu.buttons.get(j).height > player.y) {
+                    
+                }
+            }
             //#endregion
 
 		}catch (IOException e) {
