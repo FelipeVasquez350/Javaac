@@ -2,6 +2,11 @@ package Core.Javaac;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.awt.*;
 
 import javax.swing.JPanel;
@@ -19,6 +24,7 @@ public class Window extends JPanel implements Runnable{
     private Sprite background;
     public static KeyBoardListener k;
     private Scene scene; 
+    public static boolean soon = false;
 
     public Window() {
         setBackground(Color.DARK_GRAY);
@@ -92,14 +98,38 @@ public class Window extends JPanel implements Runnable{
             
             //#region UI
           /*  scene.menu.button.sprite.drawSprite(graphics, scene.menu.button.x, scene.menu.button.y);
-            if(scene.menu.button.clicked())
+            if(scene.menu.button.clicked())d
                 System.out.println("Hey");*/
+
             Sprite soonTM = new Sprite("./src/Assets/Menu/SoonTM.png");
+
+            if(soon)
+                soonTM.drawSprite(graphics, 400, 650);
+
             for (int j = 0; j<scene.menu.buttons.size(); j++) {
                 if(scene.menu.buttons.get(j).x < player.x && scene.menu.buttons.get(j).x + scene.menu.buttons.get(j).width > player.x && scene.menu.buttons.get(j).y < player.y && scene.menu.buttons.get(j).y + scene.menu.buttons.get(j).height > player.y) {
                     scene.menu.spriteBottoni.get(j).drawSprite(graphics, scene.menu.buttons.get(j).x,  scene.menu.buttons.get(j).y);
-                    if(scene.menu.buttons.get(j).clicked() && j!=0);
-                        soonTM.drawSprite(graphics, 500, 500);
+                    if(scene.menu.buttons.get(j).clicked() && j!=0) {
+                       
+                        Timer t = new Timer();
+                        t.schedule(new TimerTask() {
+                            int durata = 2;
+
+                            @Override
+                            public void run() {
+                                Window.soon=true;
+                                if (durata > 0) {                     
+                                    durata--;
+                                }
+                                else {
+                                    Window.soon=false;
+                                    t.cancel();
+                                }
+                            }
+                        }, 0, 1000);    
+                        
+                        
+                    }
                 }
 
                 else

@@ -22,7 +22,7 @@ public class Menu {
                 spriteBottoni.add(bottoniMenu.grabFrame(0, i, 180, 36));
                 spriteBottoni2.add(bottoniMenu2.grabFrame(0, i, 180, 36));
 
-                buttons.add(new Button(60, 40*i, 180, 36, bottoniMenu.grabFrame(0, i, 180, 36), bottoniMenu2.grabFrame(0, i, 180, 36), Window.k));
+                buttons.add(new Button(410, 420+36*i, 180, 36, bottoniMenu.grabFrame(0, i, 180, 36), bottoniMenu2.grabFrame(0, i, 180, 36), Window.k));
                // if (i!=0)
                     //buttons.get(i).selected=false; 
             }
