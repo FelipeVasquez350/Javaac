@@ -3,7 +3,6 @@ package Core.Player;
 import java.io.IOException;
 
 import Core.DrawHelpers.Sprite;
-import Core.Javaac.Window;
 import Core.Projectile.Projectile;
 
 public class PlayerData{
@@ -18,21 +17,17 @@ public class PlayerData{
 	public int x,y;
 	private float devilPact = 0.00f;
 	private float anglePact = 0.00f;
-
 	private boolean piercing = false;
 	private boolean spectral = false;
-
-	private Window w;
 	public Sprite Sprite;
-	public PlayerData(Window w, String spritePath) {
-		this.w = w;
+
+	public PlayerData(String spritePath) {
 		try {
 			this.Sprite = new Sprite("./src/Assets/Menu/selector.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
 
 	public int getHealth() {
 		return health;
@@ -125,17 +120,13 @@ public class PlayerData{
 	}
 	public void shot(String direction){
 		if(direction.equalsIgnoreCase("Right")){
-			//       System.out.println("Right");
-			Projectile a = new Projectile((int)getX(), (int)getY(), w);
+			new Projectile((int)getX(), (int)getY());
 		}
 		else if(direction.equalsIgnoreCase("Up")){
-			//      System.out.println("Up");
 		}
 		else if(direction.equalsIgnoreCase("Down")){
-			//     System.out.println("Down");
 		}
 		else if(direction.equalsIgnoreCase("Left")){
-			//     System.out.println("Left");
 		}
 	}
 

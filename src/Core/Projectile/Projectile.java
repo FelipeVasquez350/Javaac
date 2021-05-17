@@ -8,12 +8,11 @@ public class Projectile{
 
     public int x,y;
     public Sprite sprite;
-    private Window w;
 
-    public Projectile(int x, int y, Window w) {
+    public Projectile(int x, int y) {
         try {
             sprite = new Sprite("./src/Assets/Menu/selector.png");
-            w.addProjectile(this);
+            Window.setProjectile(this);
         } catch (IOException e) {
             e.printStackTrace();
         }  
@@ -32,7 +31,7 @@ public class Projectile{
     }
 
     public void remove() {
-        w.delProjectile(this);
+        Window.removeProjectile(this);
     }
     public boolean Move(int x, int y){
         setX(getX()+ x);

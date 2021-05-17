@@ -10,17 +10,19 @@ public class Button {
     public int x,y;
     public int width,height;
     public boolean selected;
+    public boolean done;
 
 
-    public Button(int x, int y, int width, int height, Sprite sprite, Sprite highlitedSprite, KeyBoardListener keyboard) {
+    public Button(int x, int y, int width, int height, Sprite highlitedSprite, Sprite sprite, KeyBoardListener keyboard, boolean done) {
         this.x = x;
         this.y = y;
         this.width = width;
-        this.height = height;
-        this.sprite = sprite;
+        this.height = height;        
         this.highlitedSprite = highlitedSprite;
+        this.sprite = sprite;
         this.keyboard = keyboard;
         this.selected = true;
+        this.done = done;
     }
 
     public boolean clicked() {

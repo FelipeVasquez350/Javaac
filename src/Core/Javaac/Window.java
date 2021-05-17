@@ -2,13 +2,7 @@ package Core.Javaac;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.awt.*;
-
 import javax.swing.JPanel;
 
 import Core.DrawHelpers.*;
@@ -19,12 +13,15 @@ import Core.Projectile.Projectile;
 public class Window extends JPanel implements Runnable{
     
     private Thread win;
-    private PlayerData player = new PlayerData(this, "./src/Assets/Menu/selector.png");
-    private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-    private Sprite background;
+    private Scenario scene; 
+////
+    private static Sprite background;
+    private static ArrayList<Button> buttons =  new ArrayList<Button>();
+    private static PlayerData player = new PlayerData("./src/Assets/Menu/selector.png");
+    private static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+////    
     public static KeyBoardListener k;
-    private Scene scene; 
-    public static boolean soon = false;
+    public static boolean soon = false; //Temporaney
 
     public Window() {
         setBackground(Color.DARK_GRAY);
@@ -34,23 +31,38 @@ public class Window extends JPanel implements Runnable{
         win.setPriority(Thread.MAX_PRIORITY);
         win.start();
 
-        k = new KeyBoardListener(this, player);
+        k = new KeyBoardListener(player);
         setFocusable(true);
         requestFocusInWindow();
         addKeyListener(k);
         initWindow();
     }
 
-    public KeyBoardListener getKeyBoard() {
+    public static void setBackground(Sprite sprite) {
+        background = sprite;
+    }
+    //public void removeBackground(Sprite background){}
+
+    public static void setButtons(ArrayList<Button> buttonList) {
+        buttons = buttonList;
+    }
+    //public void removeButtons(ArrayList<Button> buttons){}
+
+    //public void setPlayer(PlayerData player){}
+    //public void removePlayer(PlayerData player){}
+
+    public static void setProjectile(Projectile projectile) {
+        projectiles.add(projectile);
+    }
+    public static void removeProjectile(Projectile projectile) {
+        projectiles.remove(projectile);
+    }
+   
+    public static PlayerData getPlayer() {
+        return player;
+    }
+    public static KeyBoardListener getKeyBoard() {
         return k;
-    }
-
-    public void addProjectile(Projectile projectile) {
-        this.projectiles.add(projectile);
-    }
-
-    public void delProjectile(Projectile projectile) {
-        this.projectiles.remove(projectile);
     }
 
     @Override
@@ -58,7 +70,10 @@ public class Window extends JPanel implements Runnable{
         while(true) {
 			try {
 				Thread.sleep(1);
-				repaint();		
+				repaint();
+                if (k.escapePressed()) {
+                    System.exit(0);
+                }
 			} catch (InterruptedException e) {		
 				e.printStackTrace();		
 			}
@@ -66,93 +81,44 @@ public class Window extends JPanel implements Runnable{
     }
 
     public void initWindow() {
-        try {
-            background = new Sprite("./src/Assets/Menu/emptyscreen.png");
-            scene = new Scene();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        scene = new Scenario();
     }
 
     @Override
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         try {       
-            //#region BACKGROUND     
-            background.drawSprite(graphics, 0, 0);
+            //#region BACKGROUND  
+            if(background != null)   
+                background.drawSprite(graphics, 0, 0);
             //#endregion
             
             //#region PLAYER
-            player.Sprite.drawSprite(graphics, player.x, player.y);
+            if(player != null)
+                player.Sprite.drawSprite(graphics, player.x, player.y);
             //#endregion
 
             //#region PROJECTILES
             for (int i=0; i<projectiles.size(); i++) {
                 projectiles.get(i).sprite.drawSprite(graphics, 300,  300);
             }
-         /*  for (Projectile projectile : projectiles) { 
-                if (projectile != null) 
-				    projectile.sprite.drawSprite(graphics, 300,  300);
-			} */
+            /* for (Projectile projectile : projectiles) { 
+				projectile.sprite.drawSprite(graphics, 300,  300);
+			} THIS IS BUGGED DON'T ASK ME WHY*/
             //#endregion
-            
+    
             //#region UI
-          /*  scene.menu.button.sprite.drawSprite(graphics, scene.menu.button.x, scene.menu.button.y);
-            if(scene.menu.button.clicked())d
-                System.out.println("Hey");*/
-
             Sprite soonTM = new Sprite("./src/Assets/Menu/SoonTM.png");
-
             if(soon)
                 soonTM.drawSprite(graphics, 400, 650);
-
-            for (int j = 0; j<scene.menu.buttons.size(); j++) {
-                if(scene.menu.buttons.get(j).x < player.x && scene.menu.buttons.get(j).x + scene.menu.buttons.get(j).width > player.x && scene.menu.buttons.get(j).y < player.y && scene.menu.buttons.get(j).y + scene.menu.buttons.get(j).height > player.y) {
-                    scene.menu.spriteBottoni.get(j).drawSprite(graphics, scene.menu.buttons.get(j).x,  scene.menu.buttons.get(j).y);
-                    if(scene.menu.buttons.get(j).clicked() && j!=0) {
-                       
-                        Timer t = new Timer();
-                        t.schedule(new TimerTask() {
-                            int durata = 2;
-
-                            @Override
-                            public void run() {
-                                Window.soon=true;
-                                if (durata > 0) {                     
-                                    durata--;
-                                }
-                                else {
-                                    Window.soon=false;
-                                    t.cancel();
-                                }
-                            }
-                        }, 0, 1000);    
-                        
-                        
-                    }
-                }
-
-                else
-                    scene.menu.spriteBottoni2.get(j).drawSprite(graphics, scene.menu.buttons.get(j).x,  scene.menu.buttons.get(j).y);
-            
-                // if(!scene.menu.buttons.get(j).selected)
-                //     scene.menu.spriteBottoni2.get(j).drawSprite(graphics, scene.menu.buttons.get(j).x,  scene.menu.buttons.get(j).y);
-
-                // else
-                //     scene.menu.spriteBottoni.get(j).drawSprite(graphics, scene.menu.buttons.get(j).x,  scene.menu.buttons.get(j).y);
-            
                
-            }
-            for (int j = 0; j<scene.menu.buttons.size(); j++) {
-                if(scene.menu.buttons.get(j).x < player.x && scene.menu.buttons.get(j).x + scene.menu.buttons.get(j).width > player.x && scene.menu.buttons.get(j).y < player.y && scene.menu.buttons.get(j).y + scene.menu.buttons.get(j).height > player.y) {
-                    
-                }
+            for (int i=0; i<buttons.size(); i++) {
+                if (buttons.get(i).selected)
+                    buttons.get(i).highlitedSprite.drawSprite(graphics, buttons.get(i).x, buttons.get(i).y);
+                else
+                    buttons.get(i).sprite.drawSprite(graphics, buttons.get(i).x, buttons.get(i).y);
             }
             //#endregion
-
-		}catch (IOException e) {
-            e.printStackTrace();
-
-        }        
+		} catch (IOException e) { e.printStackTrace(); }        
     }
 }
