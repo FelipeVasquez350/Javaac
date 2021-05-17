@@ -1,18 +1,19 @@
 package Core.Javaac;
 
 import Core.GameInput.KeyBoardListener;
+import Core.Javaac.Scenarious.RoomFloor1;
 import Core.Javaac.Scenarious.Menu;
 import Core.Javaac.Scenarious.Scene;
 import Core.Player.PlayerData;
 
 public class Scenario implements Runnable{
     private Thread scenario;
-    private Scene currentScenario;
+    private static Scene currentScenario;
     private KeyBoardListener keyboard;
     private PlayerData player;
 
     public Scenario() {
-        this.currentScenario = new Menu();
+        currentScenario = new Menu();
         this.keyboard = Window.getKeyBoard();
         this.player = Window.getPlayer();
        
@@ -21,12 +22,13 @@ public class Scenario implements Runnable{
         scenario.start();
     }
 
-    /*public void setScenario(int select){
+    public static void setScenario(int select){
         switch(select){
-            case 0 -> {Menu}
-            default ->{exit}
+            case 0 -> currentScenario = new Menu();
+            case 1 -> currentScenario = new RoomFloor1();
+            default -> System.exit(0);
         }
-    }*/
+    }
 
     @Override
     public void run() {

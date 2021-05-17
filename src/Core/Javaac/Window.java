@@ -17,6 +17,8 @@ public class Window extends JPanel implements Runnable{
 ////
     private static Sprite background;
     private static ArrayList<Button> buttons =  new ArrayList<Button>();
+    private static ArrayList<Sprite> walls = new ArrayList<Sprite>();
+    private static Sprite floor;
     private static PlayerData player = new PlayerData("./src/Assets/Menu/selector.png");
     private static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 ////    
@@ -41,7 +43,12 @@ public class Window extends JPanel implements Runnable{
     public static void setBackground(Sprite sprite) {
         background = sprite;
     }
-    //public void removeBackground(Sprite background){}
+    //public void removeBackground(Sprite sprite){}
+
+    public static void setFloor(Sprite sprite) {
+        floor = sprite;
+    }
+    //public void removeFloor(Sprite sprite){}
 
     public static void setButtons(ArrayList<Button> buttonList) {
         buttons = buttonList;
@@ -50,6 +57,13 @@ public class Window extends JPanel implements Runnable{
 
     //public void setPlayer(PlayerData player){}
     //public void removePlayer(PlayerData player){}
+
+    public static void setWalls(ArrayList<Sprite> sprites) {
+        walls = sprites;
+    }
+    public static void removeWalls() {
+        walls = null;
+    }
 
     public static void setProjectile(Projectile projectile) {
         projectiles.add(projectile);
@@ -92,15 +106,12 @@ public class Window extends JPanel implements Runnable{
             if(background != null)   
                 background.drawSprite(graphics, 0, 0);
             //#endregion
-            
-            //#region PLAYER
-            if(player != null)
-                player.Sprite.drawSprite(graphics, player.x, player.y);
-            //#endregion
 
             //#region PROJECTILES
-            for (int i=0; i<projectiles.size(); i++) {
-                projectiles.get(i).sprite.drawSprite(graphics, 300,  300);
+            if(projectiles != null) {
+                for (int i=0; i<projectiles.size(); i++) {
+                    projectiles.get(i).sprite.drawSprite(graphics, 300,  300);
+                }
             }
             /* for (Projectile projectile : projectiles) { 
 				projectile.sprite.drawSprite(graphics, 300,  300);
@@ -111,13 +122,32 @@ public class Window extends JPanel implements Runnable{
             Sprite soonTM = new Sprite("./src/Assets/Menu/SoonTM.png");
             if(soon)
                 soonTM.drawSprite(graphics, 400, 650);
-               
-            for (int i=0; i<buttons.size(); i++) {
-                if (buttons.get(i).selected)
-                    buttons.get(i).highlitedSprite.drawSprite(graphics, buttons.get(i).x, buttons.get(i).y);
-                else
-                    buttons.get(i).sprite.drawSprite(graphics, buttons.get(i).x, buttons.get(i).y);
+            if(buttons != null) {   
+                for (int i=0; i<buttons.size(); i++) {
+                    if (buttons.get(i).selected)
+                        buttons.get(i).highlitedSprite.drawSprite(graphics, buttons.get(i).x, buttons.get(i).y);
+                    else
+                        buttons.get(i).sprite.drawSprite(graphics, buttons.get(i).x, buttons.get(i).y);
+                }
             }
+            //#endregion
+
+            //#region Room
+            if(walls!=null){
+                for(int i=0; i<walls.size(); i++) {
+                    switch(i) {
+                        case 0 -> walls.get(i).drawSprite(graphics, 32, 188);
+                        case 1 -> walls.get(i).drawSprite(graphics, 32, 500); 
+                        case 2 -> walls.get(i).drawSprite(graphics, 499, 188);
+                        case 3 -> walls.get(i).drawSprite(graphics, 499, 500);
+                    }
+                }
+            }
+            //#endregion
+
+            //#region PLAYER
+            if(player != null)
+                player.Sprite.drawSprite(graphics, player.x, player.y);
             //#endregion
 		} catch (IOException e) { e.printStackTrace(); }        
     }

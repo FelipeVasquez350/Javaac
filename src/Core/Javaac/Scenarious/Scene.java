@@ -8,8 +8,8 @@ import Core.Player.PlayerData;
 import Core.Projectile.Projectile;
 
 public interface Scene {
-    Sprite background = null;
-    ArrayList<Button> buttons = new ArrayList<Button>();
+    public Sprite background = null;
+    public ArrayList<Button> buttons = new ArrayList<Button>();
   /*  public PlayerData player = null;
     public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
     //public Room room = null; TODO_LATER

@@ -8,6 +8,7 @@ import java.util.TimerTask;
 import Core.DrawHelpers.Sprite;
 import Core.GameInput.KeyBoardListener;
 import Core.Javaac.Button;
+import Core.Javaac.Scenario;
 import Core.Javaac.Window;
 import Core.Player.PlayerData;
 
@@ -77,6 +78,10 @@ public class Menu implements Scene{
                 }
                 }, 0, 1000);   
             }
-        }  
+            else if (button.clicked() && button == buttons.get(0))
+                Scenario.setScenario(1);
+
+        } 
+
     }
 }
