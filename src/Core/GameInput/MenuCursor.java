@@ -5,7 +5,7 @@ import java.io.IOException;
 import Core.DrawHelpers.Sprite;
 
 public class MenuCursor {
-	public int x,y;
+	public int x = 500, y = 350;
 	public Sprite Sprite;
 	public MenuCursor() {
 

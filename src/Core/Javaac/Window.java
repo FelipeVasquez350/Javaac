@@ -184,9 +184,9 @@ public class Window extends JPanel implements Runnable{
                 if(cursor!=null) 
                     cursor.Sprite.drawSprite(graphics, cursor.x, cursor.y); 
 
-            if(player != null)
+           /* if(player != null)
                 player.Sprite.drawSprite(graphics, player.x, player.y);
-            //#endregion
+            *///#endregion
 
 		} catch (IOException e) { e.printStackTrace(); }        
 	}
