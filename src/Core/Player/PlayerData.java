@@ -23,7 +23,7 @@ public class PlayerData{
 
 	public PlayerData(String spritePath) {
 		try {
-			this.Sprite = new Sprite("./src/Assets/Menu/selector.png");
+			this.Sprite = new Sprite("./src/Assets/Menu/cursor.png");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

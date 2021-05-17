@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Core.Javaac.Window;
 import Core.Player.PlayerData;
 
 public class KeyBoardListener extends KeyAdapter {
@@ -13,10 +14,11 @@ public class KeyBoardListener extends KeyAdapter {
 	private ArrayList<Integer> keys;
 	private TimerTask task;
 	private Timer timer;
-
-	public KeyBoardListener(PlayerData p) {
+	private MenuCursor cursor;
+	public KeyBoardListener(PlayerData p, MenuCursor c) {
 		this.player = p;
 		keys=new ArrayList<Integer>();
+		cursor=c;
 	}
 
 	public void keyPressed(KeyEvent e){
@@ -32,32 +34,47 @@ public class KeyBoardListener extends KeyAdapter {
 
 				for(Integer i=0; i<keys.size(); i++){
 					try {
-						if(keys.get(i) != null) {
-							if(keys.get(i) == KeyEvent.VK_D){
-								player.move(1, 0);
+						if(keys.get(i) != null)
+							if(!Window.enablecursor){
+								if(keys.get(i) == KeyEvent.VK_D){
+									player.move(1, 0);
+								}
+								if(keys.get(i) == KeyEvent.VK_A){
+									player.move(-1, 0);
+								}
+								if(keys.get(i) == KeyEvent.VK_S){
+									player.move(0, 1);
+								}
+								if(keys.get(i) == KeyEvent.VK_W){
+									player.move(0, -1);
+								}
+								if(keys.get(i) == KeyEvent.VK_RIGHT){
+									player.shot("Right");
+								}
+								if(keys.get(i) == KeyEvent.VK_UP){
+									player.shot("UP");
+								}
+								if(keys.get(i) == KeyEvent.VK_DOWN){
+									player.shot("Down");
+								}
+								if(keys.get(i) == KeyEvent.VK_LEFT){
+									player.shot("Left");
+								}
 							}
-							if(keys.get(i) == KeyEvent.VK_A){
-								player.move(-1, 0);
+							else {
+								if(keys.get(i) == KeyEvent.VK_D){
+									cursor.move(1, 0);
+								}
+								if(keys.get(i) == KeyEvent.VK_A){
+									cursor.move(-1, 0);
+								}
+								if(keys.get(i) == KeyEvent.VK_S){
+									cursor.move(0, 1);
+								}
+								if(keys.get(i) == KeyEvent.VK_W){
+									cursor.move(0, -1);
+								}
 							}
-							if(keys.get(i) == KeyEvent.VK_S){
-								player.move(0, 1);
-							}
-							if(keys.get(i) == KeyEvent.VK_W){
-								player.move(0, -1);
-							}
-							if(keys.get(i) == KeyEvent.VK_RIGHT){
-								player.shot("Right");
-							}
-							if(keys.get(i) == KeyEvent.VK_UP){
-								player.shot("UP");
-							}
-							if(keys.get(i) == KeyEvent.VK_DOWN){
-								player.shot("Down");
-							}
-							if(keys.get(i) == KeyEvent.VK_LEFT){
-								player.shot("Left");
-							}
-						}
 					} catch(IndexOutOfBoundsException e) { e.printStackTrace(); }
 				}
 			}

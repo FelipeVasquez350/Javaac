@@ -1,5 +1,6 @@
 package Core.Javaac;
 
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -14,7 +15,7 @@ public class Main extends JFrame{
 		setLocation(460, 5);
 		setResizable(false);
 		ImageIcon icon=new ImageIcon("./src/Assets/icon.png");
-        setIconImage(icon.getImage());
+		setIconImage(icon.getImage());
 	}
 
 	public static void main(String[] args) throws Exception {
