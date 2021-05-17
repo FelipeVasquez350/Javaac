@@ -45,7 +45,7 @@ public class Sprite{
         flippedSprite= new Sprite(op.filter(sprite, null));
         return flippedSprite;
     }
-   /* public Sprite rotateSprite(int a) {
+    public Sprite rotateSprite(int a) {
         final double rads = Math.toRadians(90*a);
         final double sin = Math.abs(Math.sin(rads));
         final double cos = Math.abs(Math.cos(rads));
@@ -60,5 +60,5 @@ public class Sprite{
         rotateOp.filter(sprite, rotatedImage.sprite); 
 
         return rotatedImage;
-    }*/
+    }
 }

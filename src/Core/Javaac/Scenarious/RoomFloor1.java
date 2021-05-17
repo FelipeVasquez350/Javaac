@@ -14,7 +14,7 @@ import Core.Player.PlayerData;
 public class RoomFloor1 implements Scene{
 
 	public RoomFloor1() {
-		try { new Room(new Sprite("./src/Assets/Floor1/Wall.png")); }
+		try { new Room(new Sprite("./src/Assets/Floor1/Wall.png"), new Sprite("./src/Assets/Floor1/DoorSheet.png"), 4); }
 		catch (IOException e) { e.printStackTrace(); }
 		initBackground();
 		initButtons();
@@ -30,15 +30,12 @@ public class RoomFloor1 implements Scene{
 
 		} catch (IOException e) { e.printStackTrace(); }
 	}
-
 	@Override
 	public void initButtons() {
 		Window.setButtons((ArrayList<Button>) null);    
 	}
-
-	@Override
+    @Override
 	public void Update(KeyBoardListener keyboard, MenuCursor cursor) {
 		// TODO Auto-generated method stub       
 	}
-
 }
