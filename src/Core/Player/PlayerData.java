@@ -35,78 +35,6 @@ public class PlayerData{
 		UpdatePlayerSprite();
 	}
 
-/*	public int getHealth() {
-		return health;
-	}
-	public void setHealth(int health) {
-		this.health = health;
-	}
-	public float getSpeed() {
-		return speed;
-	}
-	public void setSpeed(float speed) {
-		this.speed = speed;
-	}
-	public float getDamage() {
-		return damage;
-	}
-	public void setDamage(float damage) {
-		this.damage = damage;
-	}
-	public float getKnockback() {
-		return knockback;
-	}
-	public void setKnockback(float knockback) {
-		this.knockback = knockback;
-	}
-	public float getTears() {
-		return tears;
-	}
-	public void setTears(float tears) {
-		this.tears = tears;
-	}
-	public float getRange() {
-		return range;
-	}
-	public void setRange(float range) {
-		this.range = range;
-	}
-	public float getShootSpeed() {
-		return shootSpeed;
-	}
-	public void setShootSpeed(float shootSpeed) {
-		this.shootSpeed = shootSpeed;
-	}
-	public float getLuck() {
-		return luck;
-	}
-	public void setLuck(float luck) {
-		this.luck = luck;
-	}
-	public float getDevilPact() {
-		return devilPact;
-	}
-	public void setDevilPact(float devilPact) {
-		this.devilPact = devilPact;
-	}
-	public float getAnglePact() {
-		return anglePact;
-	}
-	public void setAnglePact(float anglePact) {
-		this.anglePact = anglePact;
-	}
-	public boolean isPiercing() {
-		return piercing;
-	}
-	public void setPiercing(boolean piercing) {
-		this.piercing = piercing;
-	}
-	public boolean isSpectral() {
-		return spectral;
-	}
-	public void setSpectral(boolean spectral) {
-		this.spectral = spectral;
-	}*/
 	public int getX() {
 		return x;
 	}
@@ -140,27 +68,26 @@ public class PlayerData{
 		return true;
 	}
 	public void UpdatePlayerSprite() {
-		frame++;
+		frame+=6;
 		if(frame>5) {
 			frame = 0;
-			ArrayList<Sprite> p = new ArrayList<Sprite>();
+			Sprite = new ArrayList<Sprite>();
 			if (dx>0) {
-				p.add(head.grabFrame(0, currentFrame, 32, 32));
-				p.add(body.grabFrame(0, currentFrame, 32, 32));
+				Sprite.add(head.grabFrame(0, currentFrame, 32, 32));
+				Sprite.add(body.grabFrame(0, currentFrame, 32, 30));
 			}
 			else {
-				p.add(head.grabFrame(0, currentFrame, 32, 32));
-				p.add(body.grabFrame(0, currentFrame, 32, 32));
+				Sprite.add(head.grabFrame(0, currentFrame, 32, 32));
+				Sprite.add(body.grabFrame(0, currentFrame, 32, 30));
 			}
 			if (dy>0) {
-				p.add(head.grabFrame(0, currentFrame, 32, 32));
-				p.add(body.grabFrame(0, currentFrame, 32, 32));
+				Sprite.add(head.grabFrame(0, currentFrame, 32, 32));
+				Sprite.add(body.grabFrame(0, currentFrame, 32, 30));
 			}
 			else {
-				p.add(head.grabFrame(0, currentFrame, 32, 32));
-				p.add(body.grabFrame(0, currentFrame, 32, 32));
+				Sprite.add(head.grabFrame(0, currentFrame, 32, 32));
+				Sprite.add(body.grabFrame(0, currentFrame, 32, 30));
 			}
-			Sprite = p;
 		}
 	}
 	public void shot(String direction){
