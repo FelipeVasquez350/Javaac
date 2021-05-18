@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Core.DrawHelpers.Sprite;
+import Core.GameInput.KeyBoardListener;
+import Core.Player.PlayerData;
 
 public class Room {
     private ArrayList<Sprite> walls = new ArrayList<Sprite>();
@@ -13,12 +15,13 @@ public class Room {
 
     private Sprite floor;
 
-    public Room(Sprite wall, Sprite door, int doorsNumber/*, ArrayList<Sprite> rocks, int rocksNumber, Sprite floor*/){
+    public Room(Sprite wall, Sprite door, int doorsNumber, Sprite head, Sprite body/*, ArrayList<Sprite> rocks, int rocksNumber, Sprite floor*/){
         // this.walls
       //  this.doors = doors;
       //  this.rocks = rocks;
         initWalls(wall);
         initDoors(door, doorsNumber);
+        initPLayer(head, body);
     };
 
     public void initWalls(Sprite wall) {
@@ -44,6 +47,12 @@ public class Room {
     }
     public void initRocks(int n) {
 
+    }
+
+    public void initPLayer(Sprite head, Sprite body) {
+        PlayerData player = new PlayerData(head, body);
+        Window.setPlayer(player);
+        KeyBoardListener.addPlayer(player);
     }
 
 

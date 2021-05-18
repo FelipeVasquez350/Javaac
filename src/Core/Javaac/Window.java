@@ -21,7 +21,7 @@ public class Window extends JPanel implements Runnable{
 	private static ArrayList<Sprite> walls = new ArrayList<Sprite>();
 	private static ArrayList<ArrayList<Sprite>> doors = new ArrayList<ArrayList<Sprite>>();
     private static Sprite floor;
-	private static PlayerData player = new PlayerData("./src/Assets/Menu/selector.png");
+	private static PlayerData player;
 	private static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	//// 
 	public MenuCursor cursor;
@@ -40,7 +40,7 @@ public class Window extends JPanel implements Runnable{
 
 
 		cursor=new MenuCursor();
-		k = new KeyBoardListener(player, cursor);
+		k = new KeyBoardListener(cursor);
 
 		setFocusable(true);
 		requestFocusInWindow();
@@ -90,6 +90,9 @@ public class Window extends JPanel implements Runnable{
 	public static PlayerData getPlayer() {
 		return player;
 	}
+    public static void setPlayer(PlayerData playerdata) {
+		player = playerdata;
+	}
 	public static KeyBoardListener getKeyBoard() {
 		return k;
 	}
@@ -101,7 +104,7 @@ public class Window extends JPanel implements Runnable{
 			try {
 				Thread.sleep(1);
 				repaint();
-				if (k.escapePressed()) {
+				if (k!= null && k.escapePressed()) {
 					System.exit(0);
 				}
 			} catch (InterruptedException e) {		
@@ -178,8 +181,14 @@ public class Window extends JPanel implements Runnable{
 
             //#region PLAYER
 			if(!enablecursor)
-                if(player != null)
-                    player.Sprite.drawSprite(graphics, player.x, player.y);
+                if(player != null && player.Sprite.size() >0 ) {
+                    for (Sprite sprites : player.Sprite) {
+                        sprites.drawSprite(graphics, player.x, player.y);
+                    }
+                  /*  player.head
+                    player.body.drawSprite(graphics, player.x, player.y);*/
+                }
+                    
             if(enablecursor)
                 if(cursor!=null) 
                     cursor.Sprite.drawSprite(graphics, cursor.x, cursor.y); 

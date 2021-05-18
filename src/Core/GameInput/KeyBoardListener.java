@@ -10,13 +10,12 @@ import Core.Javaac.Window;
 import Core.Player.PlayerData;
 
 public class KeyBoardListener extends KeyAdapter {
-	private PlayerData player;
+	private static PlayerData player;
 	private ArrayList<Integer> keys;
 	private TimerTask task;
 	private Timer timer;
 	private MenuCursor cursor;
-	public KeyBoardListener(PlayerData p, MenuCursor c) {
-		this.player = p;
+    public KeyBoardListener(MenuCursor c) {
 		keys=new ArrayList<Integer>();
 		cursor=c;
 	}
@@ -35,7 +34,7 @@ public class KeyBoardListener extends KeyAdapter {
 				for(Integer i=0; i<keys.size(); i++){
 					try {
 						if(keys.get(i) != null)
-							if(!Window.enablecursor){
+							if(!Window.enablecursor && player != null){
 								if(keys.get(i) == KeyEvent.VK_D){
 									player.move(1, 0);
 								}
@@ -113,5 +112,8 @@ public class KeyBoardListener extends KeyAdapter {
 			}
 		}
 		return false;
+	}
+	public static void addPlayer(PlayerData playerData) {
+		player = playerData;
 	}
 }
