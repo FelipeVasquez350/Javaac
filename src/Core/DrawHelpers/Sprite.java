@@ -11,19 +11,25 @@ import java.awt.image.AffineTransformOp;
 
 public class Sprite{
     private BufferedImage sprite;
+    private int width;
+    private int height;
 
     public Sprite(String path) throws IOException {
         this.sprite = ImageIO.read(new File(path));
+        this.width = sprite.getWidth();
+        this.height = sprite.getHeight();
     }
     public Sprite(BufferedImage sprite)  {
         this.sprite = sprite;
+        this.width = sprite.getWidth();
+        this.height = sprite.getHeight();
     }
     
     public void drawSprite(Graphics graphics, int x, int y) throws IOException {
         graphics.drawImage(this.sprite, x, y, null);
     }
-    public Sprite grabFrame(int column, int row, int width, int height) {
-        Sprite frame = new Sprite(this.sprite.getSubimage((column*width), (row*height), width, height));
+    public Sprite grabFrame(int row, int column, int width, int height) {
+        Sprite frame = new Sprite(this.sprite.getSubimage((row*width), (column*height), width, height));
         return frame;
     }
     /**
@@ -60,5 +66,13 @@ public class Sprite{
         rotateOp.filter(sprite, rotatedImage.sprite); 
 
         return rotatedImage;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
     }
 }

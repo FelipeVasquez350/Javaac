@@ -185,8 +185,9 @@ public class Window extends JPanel implements Runnable{
 			//#region PLAYER
 			if(!enablecursor)
 				if(player != null && player.Sprite.size() > 0 ) {
-					for (Sprite sprites : player.Sprite) {
-						sprites.drawSprite(graphics, player.x, player.y);
+					player.UpdatePlayerSprite();
+					for (int i=0; i<player.Sprite.size(); i++) {
+						player.Sprite.get(i).drawSprite(graphics, player.x -player.Sprite.get(i).getWidth()/2, player.y - player.Sprite.get(i).getHeight()/3*i-32);
 					}
 				}
 			/*  player.head

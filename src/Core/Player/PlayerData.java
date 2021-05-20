@@ -27,6 +27,8 @@ public class PlayerData{
 	private int currentFrame = 0;
 	public Sprite head;
 	public Sprite body;
+	public int headSize = 64;
+	public int bodySize = 60;
 
 
 	public PlayerData(Sprite head, Sprite body) {
@@ -62,32 +64,49 @@ public class PlayerData{
 	public boolean move(int x, int y){
 		setX(getX()+ x);
 		setY(getY() + y);
-		
+
+		if(getX()>864)
+			setX(864);
+		else if(getX()<136)
+			setX(136);
+
+		if(getY()>708)
+			setY(708);
+		else if(getY()<292)
+			setY(292);
+
 		dx= 1*(int)Math.signum(x);
 		dy= 1*(int)Math.signum(y);
+		System.out.println(dx);
 		return true;
 	}
 	public void UpdatePlayerSprite() {
 		frame+=6;
 		if(frame>5) {
 			frame = 0;
+			currentFrame++;
+			if(currentFrame>=10) {currentFrame=0;}
 			Sprite = new ArrayList<Sprite>();
-			if (dx>0) {
-				Sprite.add(head.grabFrame(0, currentFrame, 32, 32));
-				Sprite.add(body.grabFrame(0, currentFrame, 32, 30));
-			}
+			//if(dx<dy) {
+				if (dx>0) {
+					Sprite.add(head.grabFrame(2, 0, 64, 64));
+					Sprite.add(body.grabFrame(currentFrame, 0, 64, 60));
+				}
+				else {
+					Sprite.add(head.grabFrame(2, 0, 64, 64).rotateSprite(2));
+					Sprite.add(body.grabFrame(currentFrame, 0, 64, 60).rotateSprite(2));
+				}
+			/*}
 			else {
-				Sprite.add(head.grabFrame(0, currentFrame, 32, 32));
-				Sprite.add(body.grabFrame(0, currentFrame, 32, 30));
-			}
-			if (dy>0) {
-				Sprite.add(head.grabFrame(0, currentFrame, 32, 32));
-				Sprite.add(body.grabFrame(0, currentFrame, 32, 30));
-			}
-			else {
-				Sprite.add(head.grabFrame(0, currentFrame, 32, 32));
-				Sprite.add(body.grabFrame(0, currentFrame, 32, 30));
-			}
+				if (dy>0) {
+					Sprite.add(head.grabFrame(4, 0, 64, 64));
+					Sprite.add(body.grabFrame(0, 0, 64, 60).flipSprite(0, 1));
+				}
+				else {
+					Sprite.add(head.grabFrame(0, 0, 64, 64));
+					Sprite.add(body.grabFrame(0, 0, 64, 60));
+				}
+			}	*/		
 		}
 	}
 	public void shot(String direction){
