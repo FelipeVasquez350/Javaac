@@ -23,7 +23,7 @@ public class PlayerData{
 	private boolean piercing = false;
 	private boolean spectral = false;
 	public ArrayList<Sprite> Sprite;
-	private int frame;
+	private int frame=60;
 	private int currentFrame = 0;
 	public Sprite head;
 	public Sprite body;
@@ -76,37 +76,49 @@ public class PlayerData{
 			setY(292);
 
 		dx= 1*(int)Math.signum(x);
-		dy= 1*(int)Math.signum(y);
-		System.out.println(dx);
+		dy= 2*(int)Math.signum(y);
+		if(x==0)
+			dx=0;
+		if(y==0)
+			dy=0;
+		// UpdatePlayerSprite();
+
 		return true;
 	}
 	public void UpdatePlayerSprite() {
-		frame+=6;
-		if(frame>5) {
+		if(dx!=dy)
+			frame+=1;
+		else {
+			currentFrame=0;
+			Sprite = new ArrayList<Sprite>();
+			Sprite.add(head.grabFrame(0, 0, 64, 60));
+			Sprite.add(body.grabFrame(currentFrame, 0, 64, 60));
+		}
+		if(frame>=60) {
 			frame = 0;
 			currentFrame++;
-			if(currentFrame>=10) {currentFrame=0;}
+			if(currentFrame>=9) {currentFrame=0;}
 			Sprite = new ArrayList<Sprite>();
-			//if(dx<dy) {
+			if(Math.abs(dx)>Math.abs(dy)) {
 				if (dx>0) {
-					Sprite.add(head.grabFrame(2, 0, 64, 64));
+					Sprite.add(head.grabFrame(2, 0, 64, 60));
+					Sprite.add(body.grabFrame(currentFrame, 1, 64, 64));
+				}
+				else {
+					Sprite.add(head.grabFrame(2, 0, 64, 60).flipSprite(-1,1));
+					Sprite.add(body.grabFrame(currentFrame, 1, 64, 64).flipSprite(-1,1));
+				}
+			}
+			else {
+				if (dy<0) {
+					Sprite.add(head.grabFrame(4, 0, 64, 60));
 					Sprite.add(body.grabFrame(currentFrame, 0, 64, 60));
 				}
 				else {
-					Sprite.add(head.grabFrame(2, 0, 64, 64).rotateSprite(2));
-					Sprite.add(body.grabFrame(currentFrame, 0, 64, 60).rotateSprite(2));
+					Sprite.add(head.grabFrame(0, 0, 64, 60));
+					Sprite.add(body.grabFrame(currentFrame, 0, 64, 60));
 				}
-			/*}
-			else {
-				if (dy>0) {
-					Sprite.add(head.grabFrame(4, 0, 64, 64));
-					Sprite.add(body.grabFrame(0, 0, 64, 60).flipSprite(0, 1));
-				}
-				else {
-					Sprite.add(head.grabFrame(0, 0, 64, 64));
-					Sprite.add(body.grabFrame(0, 0, 64, 60));
-				}
-			}	*/		
+			}		
 		}
 	}
 	public void shot(String direction){

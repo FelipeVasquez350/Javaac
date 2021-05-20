@@ -38,7 +38,7 @@ public class Window extends JPanel implements Runnable{
 		win.setPriority(Thread.MAX_PRIORITY);
 		win.start();
 		try {
-			player=new PlayerData(new Sprite("./src/Assets/Character/Body.png"), new Sprite("./src/Assets/Character/JavaacHead.png"));
+			player=new PlayerData(new Sprite("./src/Assets/Character/JavaacHead.png"), new Sprite("./src/Assets/Character/Body.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -186,8 +186,8 @@ public class Window extends JPanel implements Runnable{
 			if(!enablecursor)
 				if(player != null && player.Sprite.size() > 0 ) {
 					player.UpdatePlayerSprite();
-					for (int i=0; i<player.Sprite.size(); i++) {
-						player.Sprite.get(i).drawSprite(graphics, player.x -player.Sprite.get(i).getWidth()/2, player.y - player.Sprite.get(i).getHeight()/3*i-32);
+					for (int i=player.Sprite.size()-1; i>=0; i--) {
+						player.Sprite.get(i).drawSprite(graphics, player.x -player.Sprite.get(i).getWidth()/2, player.y - player.Sprite.get(i).getHeight()/3*(1-i)-32);
 					}
 				}
 			/*  player.head
