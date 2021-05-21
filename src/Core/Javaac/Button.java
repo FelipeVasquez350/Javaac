@@ -1,6 +1,7 @@
 package Core.Javaac;
 
 import Core.DrawHelpers.Sprite;
+import Core.GameInput.ControllerListener;
 import Core.GameInput.KeyBoardListener;
 
 public class Button {
@@ -26,7 +27,7 @@ public class Button {
 	}
 
 	public boolean clicked() {
-		if(this.selected && this.keyboard.enterPressed())
+		if(this.selected && this.keyboard.enterPressed() || ControllerListener.APressed())
 			return true;
 		return false;
 	}

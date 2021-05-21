@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Core.DrawHelpers.Sprite;
+import Core.GameInput.ControllerListener;
 import Core.GameInput.KeyBoardListener;
 import Core.Player.PlayerData;
 
@@ -50,9 +51,11 @@ public class Room {
     }
 
     public void initPLayer(Sprite head, Sprite body) {
-        PlayerData player = new PlayerData(head, body);
+        PlayerData player;
+        player = new PlayerData(head, body);
         Window.setPlayer(player);
         KeyBoardListener.addPlayer(player);
+        ControllerListener.addPlayer(player);
     }
 
 

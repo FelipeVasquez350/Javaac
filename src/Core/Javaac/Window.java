@@ -6,6 +6,7 @@ import java.awt.*;
 import javax.swing.JPanel;
 
 import Core.DrawHelpers.*;
+import Core.GameInput.ControllerListener;
 import Core.GameInput.KeyBoardListener;
 import Core.GameInput.MenuCursor;
 import Core.Player.PlayerData;
@@ -26,6 +27,7 @@ public class Window extends JPanel implements Runnable{
 	//// 
 	public MenuCursor cursor;
 	public static KeyBoardListener k;
+	public static ControllerListener c;
 	public static boolean soon = false; //Temporaney
 	public static boolean enablecursor = true;
 
@@ -44,7 +46,7 @@ public class Window extends JPanel implements Runnable{
 		}
 		cursor=new MenuCursor();
 		k = new KeyBoardListener(cursor);
-
+		c = new ControllerListener(cursor);
 		setFocusable(true);
 		requestFocusInWindow();
 		addKeyListener(k);
@@ -184,22 +186,16 @@ public class Window extends JPanel implements Runnable{
 
 			//#region PLAYER
 			if(!enablecursor)
-				if(player != null && player.Sprite.size() > 0 ) {
+				if(player != null && player.Sprite.size() > 0) {
 					player.UpdatePlayerSprite();
 					for (int i=player.Sprite.size()-1; i>=0; i--) {
 						player.Sprite.get(i).drawSprite(graphics, player.x -player.Sprite.get(i).getWidth()/2, player.y - player.Sprite.get(i).getHeight()/3*(1-i)-32);
 					}
 				}
-			/*  player.head
-                    player.body.drawSprite(graphics, player.x, player.y);*/
-
 			if(enablecursor)
 				if(cursor!=null) 
 					cursor.Sprite.drawSprite(graphics, cursor.x, cursor.y); 
-
-			/* if(player != null)
-                player.Sprite.drawSprite(graphics, player.x, player.y);
-			 *///#endregion
+			//#endregion
 
 		} catch (IOException e) { e.printStackTrace(); }        
 	}

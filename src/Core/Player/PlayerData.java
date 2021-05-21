@@ -92,7 +92,7 @@ public class PlayerData{
 			currentFrame=0;
 			Sprite = new ArrayList<Sprite>();
 			Sprite.add(head.grabFrame(0, 0, 64, 60));
-			Sprite.add(body.grabFrame(currentFrame, 0, 64, 60));
+			Sprite.add(body.grabFrame(0, 0, 64, 60));
 		}
 		if(frame>=60) {
 			frame = 0;
