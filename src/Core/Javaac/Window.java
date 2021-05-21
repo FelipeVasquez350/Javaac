@@ -24,12 +24,15 @@ public class Window extends JPanel implements Runnable{
 	private static Sprite floor;
 	private static PlayerData player;
 	private static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	public static boolean soon = false; //Temporaney
+	public static int Offsety;
 	//// 
 	public MenuCursor cursor;
 	public static KeyBoardListener k;
 	public static ControllerListener c;
-	public static boolean soon = false; //Temporaney
 	public static boolean enablecursor = true;
+
+	public static boolean FUMOMODE;
 
 	public Window(){
 
@@ -65,6 +68,9 @@ public class Window extends JPanel implements Runnable{
 
 	public static void setButtons(ArrayList<Button> buttonList) {
 		buttons = buttonList;
+	}
+	public static ArrayList<Button> getButtons() {
+		return buttons;
 	}
 	//public void removeButtons(ArrayList<Button> buttons){}
 
@@ -109,7 +115,7 @@ public class Window extends JPanel implements Runnable{
 			try {
 				Thread.sleep(1);
 				repaint();
-				if (k!= null && k.escapePressed()) {
+				if (k!= null && (k.escapePressed() /*|| c.B*/)) {
 					System.exit(0);
 				}
 			} catch (InterruptedException e) {		
@@ -154,9 +160,9 @@ public class Window extends JPanel implements Runnable{
 			if(buttons != null) {   
 				for (int i=0; i<buttons.size(); i++) {
 					if (buttons.get(i).selected)
-						buttons.get(i).highlitedSprite.drawSprite(graphics, buttons.get(i).x, buttons.get(i).y);
+						buttons.get(i).highlitedSprite.drawSprite(graphics, buttons.get(i).x, buttons.get(i).y+Offsety);
 					else
-						buttons.get(i).sprite.drawSprite(graphics, buttons.get(i).x, buttons.get(i).y);
+						buttons.get(i).sprite.drawSprite(graphics, buttons.get(i).x, buttons.get(i).y+Offsety);
 				}
 			}
 			//#endregion
@@ -187,7 +193,8 @@ public class Window extends JPanel implements Runnable{
 			//#region PLAYER
 			if(!enablecursor)
 				if(player != null && player.Sprite.size() > 0) {
-					player.UpdatePlayerSprite();
+					if(!FUMOMODE)
+						player.UpdatePlayerSprite();
 					for (int i=player.Sprite.size()-1; i>=0; i--) {
 						player.Sprite.get(i).drawSprite(graphics, player.x -player.Sprite.get(i).getWidth()/2, player.y - player.Sprite.get(i).getHeight()/3*(1-i)-32);
 					}

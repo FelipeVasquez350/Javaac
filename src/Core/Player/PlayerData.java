@@ -34,7 +34,13 @@ public class PlayerData{
 	public PlayerData(Sprite head, Sprite body) {
 		this.head = head;
 		this.body = body;
-		UpdatePlayerSprite();
+		if(!Window.FUMOMODE)
+			UpdatePlayerSprite();
+		else {
+			Sprite = new ArrayList<Sprite>();
+			Sprite.add(head);
+			Sprite.add(body.grabFrame(0, 0, 64, 60));
+		}	
 	}
 
 	public int getX() {

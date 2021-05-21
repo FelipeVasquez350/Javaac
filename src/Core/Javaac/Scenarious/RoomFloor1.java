@@ -14,7 +14,11 @@ import Core.Player.PlayerData;
 public class RoomFloor1 implements Scene{
 
 	public RoomFloor1() {
-		try { new Room(new Sprite("./src/Assets/Floor1/Wall.png"), new Sprite("./src/Assets/Floor1/DoorSheet.png"), 4, new Sprite("./src/Assets/Character/JavaacHead.png"), new Sprite("./src/Assets/Character/Body.png")); }
+		try { 
+			if(Window.FUMOMODE)
+			new Room(new Sprite("./src/Assets/Floor1/Wall.png"), new Sprite("./src/Assets/Floor1/DoorSheet.png"), 4, new Sprite("./src/Assets/Character/cirno.png"), new Sprite("./src/Assets/Character/Body.png")); 
+			else
+				new Room(new Sprite("./src/Assets/Floor1/Wall.png"), new Sprite("./src/Assets/Floor1/DoorSheet.png"), 4, new Sprite("./src/Assets/Character/JavaacHead.png"), new Sprite("./src/Assets/Character/Body.png")); }
 		catch (IOException e) { e.printStackTrace(); }
 		initBackground();
 		initButtons();

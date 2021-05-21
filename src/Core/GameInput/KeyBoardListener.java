@@ -13,7 +13,7 @@ import Core.Player.PlayerData;
 
 public class KeyBoardListener extends KeyAdapter {
 	private static PlayerData player;
-	private ArrayList<Integer> keys;
+	public static ArrayList<Integer> keys;
 	private TimerTask task;
 	private Timer timer;
 	private MenuCursor cursor;
@@ -105,7 +105,7 @@ public class KeyBoardListener extends KeyAdapter {
 		}
 	}
 
-	public boolean enterPressed() {
+	public static boolean enterPressed() {
 		for(int i=0; i<keys.size(); i++){
 			if(keys.get(i) == KeyEvent.VK_ENTER){
 				return true;

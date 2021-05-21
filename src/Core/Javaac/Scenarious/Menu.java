@@ -45,9 +45,9 @@ public class Menu implements Scene{
 			for (int i=0; i<5; i++) {
 				spriteButtons.add(bottoniMenu.grabFrame(0, i, 180, 36));
 				spriteButtons2.add(bottoniMenu2.grabFrame(0, i, 180, 36));
-				buttons.add(new Button(410, 420+36*i, 180, 36, bottoniMenu.grabFrame(0, i, 180, 36), bottoniMenu2.grabFrame(0, i, 180, 36), Window.k, true));
-				if (i!=0)
-					buttons.get(i).done=false;               
+				buttons.add(new Button(410, 420+36*i, 180, 36, bottoniMenu.grabFrame(0, i, 180, 36), bottoniMenu2.grabFrame(0, i, 180, 36), true));
+			//	if (i!=0 || i!=4)
+			//		buttons.get(i).done=false;               
 			}
 			Window.setButtons(buttons);
 		} 
@@ -83,6 +83,10 @@ public class Menu implements Scene{
 			else if (button.clicked() && button == buttons.get(0)) {
 				Window.enablecursor=false;
 				Scenario.setScenario(1);
+			}
+			else if (button.clicked() && button == buttons.get(4)) {
+				//Window.enablecursor=false;
+				Scenario.setScenario(2);
 			}
 
 		} 

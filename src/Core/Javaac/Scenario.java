@@ -6,6 +6,7 @@ import Core.GameInput.KeyBoardListener;
 import Core.GameInput.MenuCursor;
 import Core.Javaac.Scenarious.RoomFloor1;
 import Core.Javaac.Scenarious.Menu;
+import Core.Javaac.Scenarious.Options;
 import Core.Javaac.Scenarious.Scene;
 import Core.Player.PlayerData;
 
@@ -15,6 +16,7 @@ public class Scenario implements Runnable{
 	private KeyBoardListener keyboard;
 	private PlayerData player;
 	private MenuCursor cursor;
+
 	public Scenario(MenuCursor cursor) {
 		currentScenario = new Menu();
 		this.keyboard = Window.getKeyBoard();
@@ -29,6 +31,7 @@ public class Scenario implements Runnable{
 		switch(select){
 		case 0 -> currentScenario = new Menu();
 		case 1 -> currentScenario = new RoomFloor1();
+		case 2 -> {/*currentScenario=null;*/currentScenario = new Options();}
 		default -> System.exit(0);
 		}
 	}
@@ -37,7 +40,8 @@ public class Scenario implements Runnable{
 	public void run() {
 		while(true) {
 			try {
-				Thread.sleep(1);            
+				Thread.sleep(1);      
+				     
 				currentScenario.Update(this.keyboard, this.cursor);
 			} catch (InterruptedException e) { e.printStackTrace(); }
 		}
