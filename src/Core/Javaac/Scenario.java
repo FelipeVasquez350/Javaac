@@ -13,6 +13,7 @@ import Core.Player.PlayerData;
 public class Scenario implements Runnable{
 	private Thread scenario;
 	private static Scene currentScenario;
+	public static int typeScenario;
 	private KeyBoardListener keyboard;
 	private PlayerData player;
 	private MenuCursor cursor;
@@ -28,6 +29,7 @@ public class Scenario implements Runnable{
 	}
 
 	public static void setScenario(int select){
+		typeScenario = select;
 		switch(select){
 		case 0 -> currentScenario = new Menu();
 		case 1 -> currentScenario = new RoomFloor1();

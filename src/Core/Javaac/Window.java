@@ -9,6 +9,9 @@ import Core.DrawHelpers.*;
 import Core.GameInput.ControllerListener;
 import Core.GameInput.KeyBoardListener;
 import Core.GameInput.MenuCursor;
+import Core.GameInput.PauseControllerListener;
+import Core.GameInput.PauseKeyListener;
+import Core.Javaac.Scenarious.PauseMenu;
 import Core.Player.PlayerData;
 import Core.Projectile.Projectile;
 
@@ -16,6 +19,7 @@ public class Window extends JPanel implements Runnable{
 
 	private Thread win;
 	private Scenario scene; 
+	private PauseMenu pause;
 	////
 	private static Sprite background;
 	private static ArrayList<Button> buttons =  new ArrayList<Button>();
@@ -23,10 +27,11 @@ public class Window extends JPanel implements Runnable{
 	private static ArrayList<ArrayList<Sprite>> doors = new ArrayList<ArrayList<Sprite>>();
 	private static Sprite floor;
 	private static PlayerData player;
-	private static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	public static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public static boolean soon = false; //Temporaney
 	public static int Offsety;
 	//// 
+	private PauseControllerListener cPause =new PauseControllerListener();
 	public MenuCursor cursor;
 	public static KeyBoardListener k;
 	public static ControllerListener c;
@@ -44,6 +49,7 @@ public class Window extends JPanel implements Runnable{
 		win.start();
 		try {
 			player=new PlayerData(new Sprite("./src/Assets/Character/JavaacHead.png"), new Sprite("./src/Assets/Character/Body.png"));
+			pause=new PauseMenu(new Sprite("./src/Assets/Pause/pausescreen.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -53,6 +59,7 @@ public class Window extends JPanel implements Runnable{
 		setFocusable(true);
 		requestFocusInWindow();
 		addKeyListener(k);
+		addKeyListener(new PauseKeyListener());
 		initWindow();
 	}
 
@@ -115,9 +122,6 @@ public class Window extends JPanel implements Runnable{
 			try {
 				Thread.sleep(1);
 				repaint();
-				if (k!= null && (k.escapePressed() /*|| c.B*/)) {
-					System.exit(0);
-				}
 			} catch (InterruptedException e) {		
 				e.printStackTrace();		
 			}
@@ -145,7 +149,7 @@ public class Window extends JPanel implements Runnable{
 			//#region PROJECTILES
 			if(projectiles != null) {
 				for (int i=0; i<projectiles.size(); i++) {
-					projectiles.get(i).sprite.drawSprite(graphics, 300,  300);
+					projectiles.get(i).sprite.drawSprite(graphics, projectiles.get(i).getX(),  projectiles.get(i).getY());
 				}
 			}
 			/* for (Projectile projectile : projectiles) { 
@@ -191,7 +195,7 @@ public class Window extends JPanel implements Runnable{
 			//#endregion
 
 			//#region PLAYER
-			if(!enablecursor)
+			if(Scenario.typeScenario != 0)
 				if(player != null && player.Sprite.size() > 0) {
 					if(!FUMOMODE)
 						player.UpdatePlayerSprite();
@@ -199,6 +203,9 @@ public class Window extends JPanel implements Runnable{
 						player.Sprite.get(i).drawSprite(graphics, player.x -player.Sprite.get(i).getWidth()/2, player.y - player.Sprite.get(i).getHeight()/3*(1-i)-32);
 					}
 				}
+			if(PauseMenu.active) {
+				pause.image.drawSprite(graphics, 468, 312);
+			}
 			if(enablecursor)
 				if(cursor!=null) 
 					cursor.Sprite.drawSprite(graphics, cursor.x, cursor.y); 

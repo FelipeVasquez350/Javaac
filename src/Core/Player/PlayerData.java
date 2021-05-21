@@ -18,6 +18,7 @@ public class PlayerData{
 	private float luck = 1.00f;
 	public int x = 500, y = 500;
 	private int dx = 1, dy = -1; 
+	public static String typeProjectile;
 	private float devilPact = 0.00f;
 	private float anglePact = 0.00f;
 	private boolean piercing = false;
@@ -34,6 +35,7 @@ public class PlayerData{
 	public PlayerData(Sprite head, Sprite body) {
 		this.head = head;
 		this.body = body;
+		typeProjectile = "./src/Assets/Projectiles/tears.png";
 		if(!Window.FUMOMODE)
 			UpdatePlayerSprite();
 		else {
@@ -128,14 +130,19 @@ public class PlayerData{
 		}
 	}
 	public void shot(String direction){
-		if(direction.equalsIgnoreCase("Right")){
-			new Projectile((int)getX(), (int)getY());
-		}
-		else if(direction.equalsIgnoreCase("Up")){
-		}
-		else if(direction.equalsIgnoreCase("Down")){
-		}
-		else if(direction.equalsIgnoreCase("Left")){
+		try {
+			if(direction.equalsIgnoreCase("Right")){
+				Window.projectiles.add(new Projectile((int)getX(), (int)getY(), new Sprite(typeProjectile))); 
+			}
+			else if(direction.equalsIgnoreCase("Up")){
+			}
+			else if(direction.equalsIgnoreCase("Down")){
+			}
+			else if(direction.equalsIgnoreCase("Left")){
+			}
+
+		}catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -24,4 +24,5 @@ public class Main extends JFrame{
 		JFrame JF = new Main();
 		JF.setVisible(true);  
 	}
+	//TODO: Incremento posizione proiettili, grab pausa e grab proiettili
 }

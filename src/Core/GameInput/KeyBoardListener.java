@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Core.Javaac.Window;
+import Core.Javaac.Scenarious.PauseMenu;
 import Core.Player.PlayerData;
 
 
@@ -18,12 +19,12 @@ public class KeyBoardListener extends KeyAdapter {
 	private Timer timer;
 	private MenuCursor cursor;
 
-    public KeyBoardListener(MenuCursor c) {
+	public KeyBoardListener(MenuCursor c) {
 		keys=new ArrayList<Integer>();
 		cursor=c;
 	}
 
-	
+
 	public void keyPressed(KeyEvent e){
 		int key= e.getKeyCode();
 		if(!keys.contains(key)){
@@ -36,33 +37,35 @@ public class KeyBoardListener extends KeyAdapter {
 			public void run() {
 				try { Thread.sleep(3); }
 				catch (InterruptedException e1) { e1.printStackTrace(); }
-				for(Integer i=0; i<keys.size(); i++){
-					try {
+				if(keys!=null)
+					for(Integer i=0; i<keys.size(); i++){
 						if(keys.get(i) != null)
 							if(!Window.enablecursor && player != null){
-								if(keys.get(i) == KeyEvent.VK_D){
-									player.move(1, 0);
-								}
-								if(keys.get(i) == KeyEvent.VK_A){
-									player.move(-1, 0);
-								}
-								if(keys.get(i) == KeyEvent.VK_S){
-									player.move(0, 1);
-								}
-								if(keys.get(i) == KeyEvent.VK_W){
-									player.move(0, -1);
-								}
-								if(keys.get(i) == KeyEvent.VK_RIGHT){
-									player.shot("Right");
-								}
-								if(keys.get(i) == KeyEvent.VK_UP){
-									player.shot("UP");
-								}
-								if(keys.get(i) == KeyEvent.VK_DOWN){
-									player.shot("Down");
-								}
-								if(keys.get(i) == KeyEvent.VK_LEFT){
-									player.shot("Left");
+								if(!PauseMenu.active) {
+									if(keys.get(i) == KeyEvent.VK_D){
+										player.move(1, 0);
+									}
+									if(keys.get(i) == KeyEvent.VK_A){
+										player.move(-1, 0);
+									}
+									if(keys.get(i) == KeyEvent.VK_S){
+										player.move(0, 1);
+									}
+									if(keys.get(i) == KeyEvent.VK_W){
+										player.move(0, -1);
+									}
+									if(keys.get(i) == KeyEvent.VK_RIGHT){
+										player.shot("Right");
+									}
+									if(keys.get(i) == KeyEvent.VK_UP){
+										player.shot("UP");
+									}
+									if(keys.get(i) == KeyEvent.VK_DOWN){
+										player.shot("Down");
+									}
+									if(keys.get(i) == KeyEvent.VK_LEFT){
+										player.shot("Left");
+									}
 								}
 							}
 							else {
@@ -79,9 +82,8 @@ public class KeyBoardListener extends KeyAdapter {
 									cursor.move(0, -1);
 								}
 							}
-					} catch(IndexOutOfBoundsException e) { e.printStackTrace(); }
-				}
-				
+					}
+
 				if(player!=null && keys.size()<=0) {
 					try { Thread.sleep(10); }
 					catch (InterruptedException e1) { e1.printStackTrace(); }
@@ -113,7 +115,7 @@ public class KeyBoardListener extends KeyAdapter {
 		}
 		return false;
 	}
-	
+
 	public boolean escapePressed() {
 		for(int i=0; i<keys.size(); i++){
 			if(keys.get(i) == KeyEvent.VK_ESCAPE){
