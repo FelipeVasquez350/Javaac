@@ -45,7 +45,7 @@ public class Options implements Scene{
 
     @Override
     public void Update(KeyBoardListener keyboard, MenuCursor cursor) {
-        if(ControllerListener.B || KeyBoardListener.escapePressed()) {
+        if(ControllerListener.B) {
             Window.Offsety=0;
             Scenario.setScenario(0);
         }

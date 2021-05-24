@@ -48,7 +48,7 @@ public class Window extends JPanel implements Runnable{
 		win.setPriority(Thread.MAX_PRIORITY);
 		win.start();
 		try {
-			this.player=new PlayerData(new Sprite("./src/Assets/Character/JavaacHead.png"), new Sprite("./src/Assets/Character/Body.png"));
+			player=new PlayerData(new Sprite("./src/Assets/Character/JavaacHead.png"), new Sprite("./src/Assets/Character/Body.png"));
 			pause=new PauseMenu(new Sprite("./src/Assets/Pause/pausescreen.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
