@@ -105,7 +105,7 @@ public class PlayerData{
 			Sprite.add(head.grabFrame(0, 0, 64, 60));
 			Sprite.add(body.grabFrame(0, 0, 64, 60));
 		}
-		if(frame>=60) {
+		if(frame>=20) {
 			frame = 0;
 			currentFrame++;
 			if(currentFrame>=9) {currentFrame=0;}
@@ -136,7 +136,7 @@ public class PlayerData{
 		
 		if(direction.equalsIgnoreCase("Right")){
 			if(Window.projectiles.size()==0)
-				Window.projectiles.add(new Tear(typeProjectile)); 
+				Window.projectiles.add(new Tear(typeProjectile.grabFrame(7, 0, 64, 64))); 
 			else	
 				Window.projectiles.clear();
 		}

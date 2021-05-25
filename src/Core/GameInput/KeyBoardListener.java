@@ -42,6 +42,18 @@ public class KeyBoardListener extends KeyAdapter {
 						if(keys.get(i) != null)
 							if(!Window.enablecursor && player != null){
 								if(!PauseMenu.active) {
+									switch(keys.get(i)) {
+									case KeyEvent.VK_D -> player.move(1, 0);
+									case KeyEvent.VK_A -> player.move(-1, 0);
+									case KeyEvent.VK_S -> player.move(0, 1);
+									case KeyEvent.VK_W -> player.move(0, -1);
+									case KeyEvent.VK_RIGHT -> player.shot("Right");
+									case KeyEvent.VK_UP -> player.shot("UP");
+									case KeyEvent.VK_DOWN -> player.shot("Down");
+									case KeyEvent.VK_LEFT -> player.shot("Left");
+									}
+									/*
+
 									if(keys.get(i) == KeyEvent.VK_D){
 										player.move(1, 0);
 									}
@@ -65,7 +77,7 @@ public class KeyBoardListener extends KeyAdapter {
 									}
 									if(keys.get(i) == KeyEvent.VK_LEFT){
 										player.shot("Left");
-									}
+									}*/
 								}
 							}
 							else {

@@ -33,9 +33,9 @@ public abstract class Projectile implements Runnable{
     }
 
     public void AI() {
-        height-=0.1f;
+        height-=0.01f;
 
-        this.x += speed/player.getTearHeight();
+        this.x += 1;
         if(height > 0)
             this.AI();
     }
@@ -46,10 +46,10 @@ public abstract class Projectile implements Runnable{
     }
 
     public int getX() {
-        return x;
+        return this.x;
     }
 
     public int getY() {
-        return y;
+        return this.y;
     }
 }

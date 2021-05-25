@@ -14,6 +14,7 @@ import Core.GameInput.PauseKeyListener;
 import Core.Javaac.Scenarious.PauseMenu;
 import Core.Player.PlayerData;
 import Core.Projectile.Projectile;
+import Core.Projectile.Tear;
 
 public class Window extends JPanel implements Runnable{
 
@@ -98,7 +99,7 @@ public class Window extends JPanel implements Runnable{
 		doors = null;
 	}
 
-	public static void setProjectile(Projectile projectile) {
+	public static void addProjectile(Projectile projectile) {
 		projectiles.add(projectile);
 	}
 	public static void removeProjectile(Projectile projectile) {
@@ -146,17 +147,7 @@ public class Window extends JPanel implements Runnable{
 				background.drawSprite(graphics, 0, 0);
 			//#endregion
 
-			//#region PROJECTILES
-			if(projectiles != null) {
-				for (int i=0; i<projectiles.size(); i++) {
-					projectiles.get(i).sprite.drawSprite(graphics, projectiles.get(i).getX(),  projectiles.get(i).getY());
-				}
-			}
-			/* for (Projectile projectile : projectiles) { 
-				projectile.sprite.drawSprite(graphics, 300,  300);
-			} THIS IS BUGGED DON'T ASK ME WHY*/
-			//#endregion
-
+			
 			//#region UI
 			Sprite soonTM = new Sprite("./src/Assets/Menu/SoonTM.png");
 			if(soon)
@@ -192,6 +183,17 @@ public class Window extends JPanel implements Runnable{
 					}
 				}
 			}
+			//#endregion
+			
+			//#region PROJECTILES
+			if(projectiles != null) {
+				for (int i=0; i<projectiles.size(); i++) {
+					projectiles.get(i).sprite.drawSprite(graphics, projectiles.get(i).getX(),  projectiles.get(i).getY());
+				}
+			}
+			/* for (Projectile projectile : projectiles) { 
+				projectile.sprite.drawSprite(graphics, 300,  300);
+			} THIS IS BUGGED DON'T ASK ME WHY*/
 			//#endregion
 
 			//#region PLAYER
