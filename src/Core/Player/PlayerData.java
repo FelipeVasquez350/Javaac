@@ -6,21 +6,19 @@ import java.util.ArrayList;
 import Core.DrawHelpers.Sprite;
 import Core.Javaac.Window;
 import Core.Projectile.Projectile;
-import Core.Projectile.Tear;
 
 public class PlayerData{
 	private int health = 6;
-	private float speed = 3.00f;
+	private float speed = 1.00f;
 	private float damage = 3.50f;
 	private float knockback = 1.00f;
 	private float tears = 2.73f;
-	private float tearHeight = 1.5f;
 	private float range = 6.50f;
 	private float shootSpeed = 1.00f;
 	private float luck = 1.00f;
 	public int x = 500, y = 500;
 	private int dx = 1, dy = -1; 
-	public Sprite typeProjectile;
+	public static String typeProjectile;
 	private float devilPact = 0.00f;
 	private float anglePact = 0.00f;
 	private boolean piercing = false;
@@ -37,8 +35,7 @@ public class PlayerData{
 	public PlayerData(Sprite head, Sprite body) {
 		this.head = head;
 		this.body = body;
-		try { typeProjectile = new Sprite("./src/Assets/Projectiles/tears.png"); } 
-		catch (IOException e) { e.printStackTrace(); }
+		typeProjectile = "./src/Assets/Projectiles/tears.png";
 		if(!Window.FUMOMODE)
 			UpdatePlayerSprite();
 		else {
@@ -133,30 +130,20 @@ public class PlayerData{
 		}
 	}
 	public void shot(String direction){
-		
-		if(direction.equalsIgnoreCase("Right")){
-			if(Window.projectiles.size()==0)
-				Window.projectiles.add(new Tear(typeProjectile)); 
-			else	
-				Window.projectiles.clear();
-		}
-		else if(direction.equalsIgnoreCase("Up")){
-		}
-		else if(direction.equalsIgnoreCase("Down")){
-		}
-		else if(direction.equalsIgnoreCase("Left")){
+		try {
+			if(direction.equalsIgnoreCase("Right")){
+				Window.projectiles.add(new Projectile((int)getX(), (int)getY(), new Sprite(typeProjectile))); 
+			}
+			else if(direction.equalsIgnoreCase("Up")){
+			}
+			else if(direction.equalsIgnoreCase("Down")){
+			}
+			else if(direction.equalsIgnoreCase("Left")){
+			}
+
+		}catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
-	public float getSpeed() {
-		return this.speed;
-	}
-
-	public float getDamage() {
-		return this.damage;
-	}
-
-	public float getTearHeight() {
-		return this.tearHeight;
-	}
 }

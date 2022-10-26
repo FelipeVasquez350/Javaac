@@ -1,55 +1,37 @@
 package Core.Projectile;
 
 import java.io.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 import Core.DrawHelpers.Sprite;
 import Core.Javaac.Window;
-import Core.Player.PlayerData;
+public class Projectile{
 
-public abstract class Projectile implements Runnable{
+	public int x,y;
+	public Sprite sprite;
 
-    private Thread thread;
-    private Window w;
-    private int x = 0, y = 0;
-    private float height;
-    private float speed;
-    public Sprite sprite;
-    private PlayerData player;
+	public Projectile(int x, int y, Sprite sprite) {
+		this.sprite = sprite;
+		Window.setProjectile(this);
+	}
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
 
-    public Projectile(Sprite sprite) {
-        thread = new Thread(this);
-        thread.setPriority(Thread.MAX_PRIORITY);
-        thread.start();
-        this.player = Window.getPlayer();
-        this.x = player.x;
-        this.y = player.y;
-        this.height = player.getTearHeight();
-        this.speed = player.getSpeed();
-        this.sprite = sprite;
-    }
-
-    public void AI() {
-        height-=0.1f;
-
-        this.x += speed/player.getTearHeight();
-        if(height > 0)
-            this.AI();
-    }
-
-    @Override
-    public void run() {
-        AI();        
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
+	public void remove() {
+		Window.removeProjectile(this);
+	}
+	public boolean Move(int x, int y){
+		setX(getX()+ x);
+		setY(getY() + y);
+		return true;
+	}
 }

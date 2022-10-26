@@ -116,7 +116,7 @@ public class KeyBoardListener extends KeyAdapter {
 		return false;
 	}
 
-	public static boolean escapePressed() {
+	public boolean escapePressed() {
 		for(int i=0; i<keys.size(); i++){
 			if(keys.get(i) == KeyEvent.VK_ESCAPE){
 				return true;
